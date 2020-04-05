@@ -17,7 +17,7 @@ func practical_test() error {
 		return err
 	}
 
-	if err := custome_query(); err != nil {
+	if err := custom_query(); err != nil {
 		return err
 	}
 
@@ -29,7 +29,7 @@ func practical_test() error {
 		return err
 	}
 
-	if err := custome_struct(); err != nil {
+	if err := custom_struct(); err != nil {
 		return err
 	}
 
@@ -48,6 +48,7 @@ func practical_test() error {
 	return nil
 }
 
+// built_query is a function to execute query with userQuery receiver.
 func built_query() error {
 
 	result, err := models.Users(qm.Where("age = ?", 27)).All(context.Background(), DB)
@@ -66,7 +67,8 @@ func built_query() error {
 	return nil
 }
 
-func custome_query() error {
+// custom_query is a function to execute query with Query receiver.
+func custom_query() error {
 
 	var result = new(UserSliceModel)
 
@@ -80,7 +82,7 @@ func custome_query() error {
 	err := models.NewQuery(queries...).Bind(context.Background(), DB, &result.UserSlice)
 
 	if err == nil {
-		fmt.Println("--- custome query ---")
+		fmt.Println("--- custom query ---")
 		for _, user := range result.UserSlice {
 			fmt.Printf("result : \n  user_id: %d\n  name: %s\n  age: %d\n",
 				user.UserID, user.Name, user.Age)
@@ -91,6 +93,7 @@ func custome_query() error {
 	return err
 }
 
+// raw_query is a function to execute query with raw query.
 func raw_query() error {
 
 	var result = new(UserSliceModel)
@@ -119,9 +122,10 @@ func raw_query() error {
 	return err
 }
 
-func custome_struct() error {
+// custom_struct is a function to execute query with Query receiver and bind result to custom struct.
+func custom_struct() error {
 
-	var result = new(UserCustomeSliceModel)
+	var result = new(UserCustomSliceModel)
 
 	var queries []qm.QueryMod
 	{
@@ -132,7 +136,7 @@ func custome_struct() error {
 
 	err := models.NewQuery(queries...).Bind(context.Background(), DB, &result.USlice)
 	if err == nil {
-		fmt.Println("--- custome struct ---")
+		fmt.Println("--- custom struct ---")
 		for _, user := range result.USlice {
 			fmt.Printf("result : \n  user_id: %d\n  name: %s\n",
 				user.UserID, user.Name)
@@ -143,6 +147,8 @@ func custome_struct() error {
 	return err
 }
 
+// inner_join is a function to execute inner join query with Query receiver.
+// When use inner join, you need prepare custom struct.
 func inner_join() error {
 
 	var result = new(UserAndDivisionSliceModel)
@@ -167,6 +173,8 @@ func inner_join() error {
 	return err
 }
 
+// outer_join is a function to execute inner join query with raw query.
+// When use outer join, you need prepare custom struct which is constituted nullable variable.
 func outer_join() error {
 	var result = new(UserAndBranchSliceModel)
 
@@ -196,6 +204,7 @@ func outer_join() error {
 	return err
 }
 
+// prepare_data is a fucntion to prepare test data.
 func prepare_data() error {
 
 	if err := (&models.User{UserID: 1, Name: "Ren", Age: 27}).Insert(context.Background(), DB, boil.Infer()); err != nil {
@@ -217,6 +226,7 @@ func prepare_data() error {
 	return nil
 }
 
+// delete_data is a function to delete test data.
 func delete_data() error {
 
 	if _, err := models.Divisions().DeleteAll(context.Background(), DB); err != nil {

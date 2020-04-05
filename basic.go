@@ -63,6 +63,7 @@ func basic_select_one() error {
 	if err == nil {
 		fmt.Printf("--- selected ---\nid: %d\nname: %s\nage: %d\n",
 			findedUser.UserID, findedUser.Name, findedUser.Age)
+		fmt.Println()
 	}
 
 	return err

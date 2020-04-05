@@ -14,13 +14,13 @@ type UserSliceModel struct {
 	models.UserSlice
 }
 
-type UserCustomeModel struct {
+type UserCustomModel struct {
 	UserID int    `boil:"user_id"`
 	Name   string `boil:"name"`
 }
 
-type UserCustomeSliceModel struct {
-	USlice []*UserCustomeModel
+type UserCustomSliceModel struct {
+	USlice []*UserCustomModel
 }
 
 type UserAndDivision struct {
