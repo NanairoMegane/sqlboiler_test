@@ -8,7 +8,12 @@ func main() {
 	InitDB()
 
 	// do basic test.
-	if err := basic_test(); err != nil {
+	// if err := basic_test(); err != nil {
+	// 	fmt.Printf("error : %s\n", err)
+	// }
+
+	// do practical test.
+	if err := practical_test(); err != nil {
 		fmt.Printf("error : %s\n", err)
 	}
 

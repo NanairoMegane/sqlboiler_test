@@ -13,26 +13,22 @@ import (
 func basic_test() error {
 
 	// Insert
-	err := basic_insert()
-	if err != nil {
+	if err := basic_insert(); err != nil {
 		return err
 	}
 
 	// Update
-	err = basic_update()
-	if err != nil {
+	if err := basic_update(); err != nil {
 		return err
 	}
 
 	// Select
-	err = basic_select_one()
-	if err != nil {
+	if err := basic_select_one(); err != nil {
 		return err
 	}
 
 	// Delete
-	err = basic_delete()
-	if err != nil {
+	if err := basic_delete(); err != nil {
 		return err
 	}
 
