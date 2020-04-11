@@ -17,11 +17,11 @@ func practical_test() error {
 		return err
 	}
 
-	if err := custom_query(); err != nil {
+	if err := built_query(); err != nil {
 		return err
 	}
 
-	if err := built_query(); err != nil {
+	if err := custom_query(); err != nil {
 		return err
 	}
 
@@ -204,7 +204,7 @@ func outer_join() error {
 	return err
 }
 
-// prepare_data is a fucntion to prepare test data.
+// prepare_data is a function to prepare test data.
 func prepare_data() error {
 
 	if err := (&models.User{UserID: 1, Name: "Ren", Age: 27}).Insert(context.Background(), DB, boil.Infer()); err != nil {
