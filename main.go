@@ -12,4 +12,9 @@ func main() {
 		fmt.Printf("error : %s\n", err)
 	}
 
+	// do practical test.
+	if err := practical_test(); err != nil {
+		fmt.Printf("error : %s\n", err)
+	}
+
 }
